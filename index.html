@@ -378,12 +378,13 @@ body.cardnews-open{overflow:hidden;}
   border-radius:4px; overflow:hidden; background:#fff;
   border:1px solid rgba(0,0,0,0.08);
   box-shadow:0 20px 45px rgba(0,0,0,0.14);
-  transform-style:preserve-3d;
+  transform-style:preserve-3d; cursor:pointer;
   transition:transform .38s cubic-bezier(.22,.68,.36,1), opacity .38s ease, filter .38s ease;
   will-change:transform, opacity, filter;
 }
 .cardnews-card.active{
   box-shadow:0 26px 60px rgba(0,0,0,0.18), 0 0 46px rgba(229,52,42,0.14);
+  cursor:default;
 }
 .cardnews-card img{
   width:100%; height:100%; object-fit:contain; display:block;
@@ -1222,15 +1223,18 @@ document.addEventListener('keydown', (e)=>{
   else if(e.key === 'ArrowLeft') cnPrevSlide();
 });
 
-/* pointer-based swipe/drag (touch + mouse unified) */
+/* pointer-based swipe/drag (touch + mouse unified) + click-to-center on side cards */
 let cnDragStartX = null;
 let cnDragging = false;
+let cnPointerDownCard = null;
 const CN_SWIPE_THRESHOLD = 50;
+const CN_CLICK_THRESHOLD = 6;
 
 cnStage.addEventListener('pointerdown', (e)=>{
   if(!cnSlug) return;
   cnDragStartX = e.clientX;
   cnDragging = true;
+  cnPointerDownCard = e.target.closest('.cardnews-card');
   try{ cnStage.setPointerCapture(e.pointerId); }catch(err){}
 });
 cnStage.addEventListener('pointerup', (e)=>{
@@ -1240,10 +1244,14 @@ cnStage.addEventListener('pointerup', (e)=>{
   if(Math.abs(deltaX) > CN_SWIPE_THRESHOLD){
     if(deltaX < 0) cnNextSlide();
     else cnPrevSlide();
+  } else if(Math.abs(deltaX) <= CN_CLICK_THRESHOLD && cnPointerDownCard){
+    const idx = cnCardEls.indexOf(cnPointerDownCard);
+    if(idx !== -1 && idx !== cnIndex){ cnIndex = idx; cnRender(); }
   }
   cnDragStartX = null;
+  cnPointerDownCard = null;
 });
-cnStage.addEventListener('pointercancel', ()=>{ cnDragging = false; cnDragStartX = null; });
+cnStage.addEventListener('pointercancel', ()=>{ cnDragging = false; cnDragStartX = null; cnPointerDownCard = null; });
 </script>
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.23/bundled/lenis.min.js"></script>
 <script>

@@ -93,9 +93,14 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible{
     linear-gradient(180deg, rgba(12,12,11,0.55) 0%, rgba(12,12,11,0.88) 100%),
     url('assets/images/hero-stadium.jpg');
   background-size:cover; background-position:center;
-  color:var(--hero-text); min-height:100vh; display:flex; flex-direction:column; justify-content:center; position:relative; padding:150px 0 90px;
+  color:var(--hero-text); min-height:100vh; display:flex; flex-direction:column; justify-content:center; position:relative; padding:150px 0 90px; overflow:hidden;
 }
 .hero::before{content:""; position:absolute; inset:0; backdrop-filter:grayscale(0.6);}
+.hero-blob{
+  position:absolute; top:50%; left:50%; width:640px; height:640px; margin:-320px 0 0 -320px;
+  border-radius:50%; background:radial-gradient(circle, rgba(var(--accent-rgb),0.08), rgba(var(--accent-rgb),0) 70%);
+  filter:blur(40px); z-index:0; pointer-events:none; will-change:transform;
+}
 .hero-eyebrow{font-size:var(--eyebrow-size); letter-spacing:0.12em; text-transform:uppercase; color:var(--hero-muted); margin-bottom:26px; position:relative; display:inline-block; padding-bottom:6px;}
 .hero-eyebrow::after{content:""; position:absolute; left:0; bottom:0; height:1px; width:100%; background:currentColor; transform:scaleX(0); transform-origin:left; animation:eyebrowLine .7s cubic-bezier(.65,0,.35,1) .3s forwards;}
 @keyframes eyebrowLine{to{transform:scaleX(1);}}
@@ -495,6 +500,7 @@ body.cardnews-open{overflow:hidden;}
 </nav>
 
 <header class="hero" id="top">
+  <div class="hero-blob" aria-hidden="true"></div>
   <div class="wrap">
     <p class="hero-eyebrow">Sports Business Portfolio</p>
     <h1 class="hero-name"><span class="ch" style="--i:0">문</span><span class="ch" style="--i:1">준</span><span class="ch" style="--i:2">환</span></h1>
@@ -759,6 +765,27 @@ body.cardnews-open{overflow:hidden;}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script>
+/* ---------- HERO: mouse-follow blob ---------- */
+(function(){
+  const hero = document.getElementById('top');
+  const blob = hero && hero.querySelector('.hero-blob');
+  if(!hero || !blob) return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion) return;
+  let targetX=0, targetY=0, curX=0, curY=0;
+  hero.addEventListener('mousemove', (e)=>{
+    const rect = hero.getBoundingClientRect();
+    targetX = (e.clientX - rect.left - rect.width/2) * 0.3;
+    targetY = (e.clientY - rect.top - rect.height/2) * 0.3;
+  });
+  (function tick(){
+    curX += (targetX-curX)*0.05;
+    curY += (targetY-curY)*0.05;
+    blob.style.transform = `translate3d(${curX.toFixed(1)}px, ${curY.toFixed(1)}px, 0)`;
+    requestAnimationFrame(tick);
+  })();
+})();
+
 /* ---------- HERO: name stagger settle + magnetic hover ---------- */
 (function(){
   const nameEl = document.querySelector('.hero-name');

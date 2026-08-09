@@ -704,9 +704,9 @@ body.cardnews-open{overflow:hidden;}
   </div>
 </footer>
 
-<div class="modal-overlay" id="modalOverlay">
+<div class="modal-overlay" id="modalOverlay" data-lenis-prevent>
+  <button class="modal-close" id="modalClose" type="button" aria-label="닫기">×</button>
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="modal-close" id="modalClose" type="button" aria-label="닫기">×</button>
     <p class="modal-cat" id="modalCat"></p>
     <h3 class="modal-title" id="modalTitle"></h3>
     <p class="modal-meta" id="modalMeta"></p>
@@ -737,7 +737,7 @@ body.cardnews-open{overflow:hidden;}
   </div>
 </div>
 
-<div class="cardnews-overlay" id="cardnewsOverlay" role="dialog" aria-modal="true" aria-label="카드뉴스 뷰어">
+<div class="cardnews-overlay" id="cardnewsOverlay" role="dialog" aria-modal="true" aria-label="카드뉴스 뷰어" data-lenis-prevent>
   <button class="cardnews-close" id="cardnewsClose" type="button" aria-label="닫기">×</button>
   <div class="cardnews-meta">
     <span class="cardnews-title" id="cardnewsTitle"></span>

@@ -118,8 +118,8 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible{
 .hero-sub strong{color:#93C5FD; font-weight:600;}
 .hero-actions{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:70px;}
 .btn{
-  font-size:13px; letter-spacing:0.02em; padding:13px 28px; border-radius:var(--radius);
-  display:inline-flex; align-items:center; gap:8px;
+  font-size:13px; letter-spacing:0.02em; padding:14px 32px; border-radius:var(--radius);
+  display:inline-flex; align-items:center; gap:8px; cursor:pointer;
   transition:background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 }
 .btn:active{transform:scale(0.97);}
@@ -127,8 +127,6 @@ a:focus-visible, button:focus-visible, [role="button"]:focus-visible{
 .btn-primary:hover{background:var(--accent-hover); box-shadow:0 10px 24px rgba(var(--accent-rgb),0.35);}
 .btn-primary .arrow{display:inline-block; transition:transform var(--dur-fast) var(--ease);}
 .btn-primary:hover .arrow{transform:translateX(4px);}
-.btn-ghost{border:1px solid var(--hero-border); color:var(--hero-text); background:transparent;}
-.btn-ghost:hover{border-color:var(--accent); background:rgba(var(--accent-rgb),0.15); box-shadow:0 10px 24px rgba(0,0,0,0.3);}
 .hero-tags{display:flex; gap:10px; flex-wrap:wrap;}
 .hero-tags span{
   border:1px solid rgba(255,255,255,0.6); border-radius:999px; padding:6px 14px;
@@ -518,7 +516,6 @@ body.cardnews-open{overflow:hidden;}
     <p class="hero-sub">끊임없이 배우고 발전하려는 자세, <strong>축구를 향한 진심</strong>, 유연하고 창의적인 문제해결로 스포츠 비즈니스를 기획합니다. 스포츠 마케팅 대행사와 에이전시를 지원합니다.</p>
     <div class="hero-actions">
       <a href="#projects" class="btn btn-primary">프로젝트 보기 <span class="arrow">→</span></a>
-      <a href="#about" class="btn btn-ghost">이력 보기</a>
     </div>
     <div class="hero-tags">
       <span>스폰서십 전략</span>

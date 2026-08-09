@@ -1310,7 +1310,7 @@ cnStage.addEventListener('pointercancel', ()=>{ cnDragging = false; cnDragStartX
 <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.23/bundled/lenis.min.js"></script>
 <script>
 if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-  const lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 0.85 });
+  const lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 0.35 });
   function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
   requestAnimationFrame(raf);
 }

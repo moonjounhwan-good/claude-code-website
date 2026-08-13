@@ -366,6 +366,7 @@ body.modal-open{overflow:hidden;}
 }
 .modal-section h4{font-size:19px; font-weight:600; color:var(--ink); letter-spacing:-0.01em; margin-bottom:16px;}
 .modal-section p{font-size:var(--text-muted-size); color:var(--muted); line-height:1.85;}
+.modal-section p + p{margin-top:var(--m-space-md);}
 .modal-section ul{margin:0; padding-left:18px;}
 .modal-section li{font-size:var(--text-muted-size); color:var(--muted); line-height:1.8; margin-bottom:10px;}
 .modal-section li::marker{color:var(--accent);}
@@ -387,6 +388,7 @@ body.modal-open{overflow:hidden;}
 
 /* ---------- PROJECT MODAL — LIVE DEMO IFRAME ---------- */
 #modalDemoSection:not(.has-demo){display:none;}
+#modalWhySection:not(.has-why){display:none;}
 .modal-demo-wrap{
   width:100%; border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden;
   background:var(--bg-alt); box-shadow:var(--shadow-sm);
@@ -843,6 +845,11 @@ body.cardnews-open{overflow:hidden;}
       </div>
       <a id="modalDemoLink" class="modal-demo-link" href="" target="_blank" rel="noopener">새 탭에서 전체화면으로 열기 ↗</a>
     </div>
+    <div class="modal-section" id="modalWhySection">
+      <p class="modal-section-label">06 / WHY</p>
+      <h4 id="modalWhyTitle"></h4>
+      <div id="modalWhy"></div>
+    </div>
   </div>
 </div>
 
@@ -1100,7 +1107,13 @@ const projectDetails = {
         ]}
       ]
     },
-    demoUrl: 'https://temporary-swift-comet-5q40ixn.vercel.app/'
+    demoUrl: 'https://temporary-swift-comet-5q40ixn.vercel.app/',
+    whyTitle: '왜 이 프로젝트를 만들었는가',
+    why: [
+      'K리그 광고 구좌는 대기업 독점이 아닙니다. LED 회전보드, 하프타임 전광판 모두 여러 스폰서가 순환하며 나눠 쓰는 구조라, 실제 진입 비용은 생각보다 낮습니다. 문제는 이 정보가 마케팅팀 없는 소상공인에게는 닿지 않는다는 점이었습니다.',
+      '그래서 광고 구좌를 3D 경기장 위에서 직접 클릭해보고, 계약 기간에 따른 월 부담금을 바로 확인할 수 있는 계산기를 만들었습니다.',
+      '비용이 부담된다면 프리시즌 한정 시범 집행이나, 여러 소상공인이 구좌 하나를 공동 매입하는 \'연합 스폰서십\'도 대안이 될 수 있습니다.'
+    ]
   }
 };
 
@@ -1121,6 +1134,9 @@ const modalDemoSection = document.getElementById('modalDemoSection');
 const modalDemoFrame = document.getElementById('modalDemoFrame');
 const modalDemoLink = document.getElementById('modalDemoLink');
 const modalTopDemoLink = document.getElementById('modalTopDemoLink');
+const modalWhySection = document.getElementById('modalWhySection');
+const modalWhyTitle = document.getElementById('modalWhyTitle');
+const modalWhy = document.getElementById('modalWhy');
 
 function renderCompareBlock(data){
   const metric = (m, isResult) => `
@@ -1315,6 +1331,15 @@ function openProjectModal(key){
     modalDemoLink.href = '';
     modalTopDemoLink.href = '';
     modalTopDemoLink.classList.remove('has-demo');
+  }
+  if(d.why){
+    modalWhySection.classList.add('has-why');
+    modalWhyTitle.textContent = d.whyTitle || '';
+    modalWhy.innerHTML = d.why.map(p => `<p>${p}</p>`).join('');
+  } else {
+    modalWhySection.classList.remove('has-why');
+    modalWhyTitle.textContent = '';
+    modalWhy.innerHTML = '';
   }
   modalOverlay.classList.add('open');
   document.body.classList.add('modal-open');

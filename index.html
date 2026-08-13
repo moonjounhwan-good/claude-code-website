@@ -375,6 +375,20 @@ body.modal-open{overflow:hidden;}
 }
 .modal-media-caption{font-size:11px; color:var(--muted); margin-top:8px; line-height:1.5;}
 
+/* ---------- PROJECT MODAL — LIVE DEMO IFRAME ---------- */
+#modalDemoSection:not(.has-demo){display:none;}
+.modal-demo-wrap{
+  width:100%; border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden;
+  background:var(--bg-alt); box-shadow:var(--shadow-sm);
+}
+.modal-demo-iframe{width:100%; height:640px; border:0; display:block;}
+@media(max-width:640px){.modal-demo-iframe{height:420px;}}
+.modal-demo-link{
+  display:inline-block; margin-top:12px; font-size:13px; color:var(--accent);
+  text-decoration:none; border-bottom:1px solid transparent; transition:border-bottom-color var(--dur-fast) var(--ease);
+}
+.modal-demo-link:hover{border-bottom-color:var(--accent);}
+
 /* ---------- PROJECT MODAL — DATA CHARTS (Chart.js) ---------- */
 .modal-chart-canvas-wrap{
   position:relative; height:230px; min-width:0; padding:14px var(--m-space-sm) 6px;
@@ -683,6 +697,41 @@ body.cardnews-open{overflow:hidden;}
         </div>
       </div>
 
+      <div class="proj-card" data-cat="sponsor">
+        <div class="proj-head">
+          <div class="proj-num">04</div>
+          <div class="proj-titlewrap">
+            <div class="proj-cat">프로덕트 개발 · 스폰서십 계산기</div>
+            <h3>K-League Sponsor Ad Estimator — K리그 소상공인 스폰서십 계산기</h3>
+            <div class="proj-meta">Three.js · React · Tailwind CSS · 개인 프로젝트 · 직접 체험 가능</div>
+          </div>
+          <div class="proj-arrow">+</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-body-inner proj-preview">
+            <div class="proj-preview-media">
+              <div class="proj-preview-shot"><img src="assets/images/projects/kleague-3d-stadium.jpg" alt="3D 경기장 위 광고 구좌 선택 화면"></div>
+              <div class="proj-preview-shot"><img src="assets/images/projects/kleague-kpi-panel.jpg" alt="실시간 미디어 가치·노출수·CPM·ROI 계산 패널"></div>
+            </div>
+            <div class="proj-preview-text">
+              <p class="proj-preview-label">Overview</p>
+              <p>K리그 광고 구좌를 3D 경기장 위에서 선택하면 실시간으로 노출 효과와 비용을 계산해주는 소상공인 맞춤 스폰서십 견적 도구입니다.</p>
+              <p class="proj-preview-label">기획배경</p>
+              <p>구단 스폰서십이 대기업 중심으로만 논의되는 구조에서, 지역 소상공인·중소기업도 부담 없이 참여할 수 있는 견적 모델이 필요하다고 판단해 직접 개발했습니다.</p>
+            </div>
+            <div class="proj-preview-footer">
+              <div class="proj-tags">
+                <span class="tag">Three.js 3D 시각화</span>
+                <span class="tag">실시간 KPI 계산</span>
+                <span class="tag">소상공인 스폰서십</span>
+                <span class="tag">직접 체험 가능</span>
+              </div>
+              <button class="proj-detail-btn" data-project="kleague" type="button">상세 보기 <span class="arrow">→</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -773,6 +822,14 @@ body.cardnews-open{overflow:hidden;}
       <p class="modal-section-label">04 / TOOLKIT</p>
       <h4>툴 · 배운점</h4>
       <p id="modalLearned"></p>
+    </div>
+    <div class="modal-section" id="modalDemoSection">
+      <p class="modal-section-label">05 / LIVE DEMO</p>
+      <h4>직접 체험해보기</h4>
+      <div class="modal-demo-wrap">
+        <iframe id="modalDemoFrame" class="modal-demo-iframe" src="" title="라이브 데모" loading="lazy"></iframe>
+      </div>
+      <a id="modalDemoLink" class="modal-demo-link" href="" target="_blank" rel="noopener">새 탭에서 전체화면으로 열기 ↗</a>
     </div>
   </div>
 </div>
@@ -1002,6 +1059,36 @@ const projectDetails = {
         ]}
       ]
     }
+  },
+  kleague: {
+    cat: '프로덕트 개발 · 스폰서십 계산기',
+    title: 'K-League Sponsor Ad Estimator — K리그 소상공인 스폰서십 계산기',
+    meta: 'Three.js · React · Tailwind CSS · 개인 프로젝트',
+    overview: 'K리그 광고 구좌를 3D 경기장 위에서 클릭으로 선택하면, 계약 기간과 구좌 조합에 따른 노출 효과와 비용을 실시간으로 계산해주는 소상공인 맞춤 스폰서십 견적 도구입니다. 아래 데모에서 직접 구좌를 선택하고 견적을 확인해볼 수 있습니다.',
+    background: '구단 스폰서십은 33개 공식 스폰서 중 대부분이 대기업·B2B 중심으로 구성되는 등, 진입 장벽이 높다는 문제에서 출발했습니다. 반면 마케팅팀이 따로 없는 지역 소상공인·중소기업은 스폰서십 비용과 효과를 가늠할 방법 자체가 없어 참여를 시도조차 못하는 경우가 많습니다. "대기업만이 구단의 스폰서가 될 수 있는 것이 아니다"라는 문제의식으로, 누구나 몇 번의 클릭만으로 자신에게 맞는 스폰서십 규모를 가늠할 수 있는 도구를 직접 만들었습니다.',
+    work: [
+      'Three.js로 3D 경기장을 직접 구현 — 와이어프레임 스탠드, 클릭 가능한 광고 구좌(회전보드·고정보드·전광판·현수막·광장 브랜딩 등)',
+      '한국프로축구연맹 공식 마케팅 규정(2023.02.20 개정) 기준으로 실시간 KPI 계산 로직 구현 — 미디어 가치, 노출수, CPM, ROI',
+      '계약 기간별(3/6/9/12개월) 할인율 적용 및 월 부담금 자동 환산 로직 설계',
+      '로고·상품 이미지를 업로드하면 3D 목업에 실시간으로 반영되는 기능 구현',
+      '대기업 중심이 아닌 지역 소상공인·중소기업이 부담 없이 참여할 수 있는 스폰서십 모델 제안 및 UI 설계'
+    ],
+    learned: 'Three.js로 인터랙티브 3D 씬을 구성하고 React 상태와 연동하는 법, 그리고 공식 규정(마케팅 규정 원문)을 실제 계산 로직으로 옮기는 과정을 경험했습니다. 스폰서십을 "견적을 몰라서 참여를 포기하는" 소상공인의 눈높이에서 설계하며, 복잡한 마케팅 지표(CPM, ROI)를 비전문가도 이해할 수 있는 언어로 풀어내는 법을 배웠습니다.',
+    stats: [
+      { value: '4종', label: '실시간 KPI (미디어가치·노출수·CPM·ROI)' },
+      { value: '3/6/9/12개월', label: '계약 기간별 할인율 적용' },
+      { value: '2023.02.20', label: 'K리그 공식 마케팅 규정 기준' },
+      { value: 'Three.js', label: '3D 경기장 직접 구현' }
+    ],
+    media: {
+      overview: [
+        { cols: 2, items: [
+          { src: 'assets/images/projects/kleague-3d-stadium.jpg', caption: '3D 경기장 와이어프레임 위 광고 구좌 선택 화면' },
+          { src: 'assets/images/projects/kleague-kpi-panel.jpg', caption: '계약 기간별 할인율 적용 · 미디어가치/노출수/CPM/ROI 실시간 계산 패널' }
+        ]}
+      ]
+    },
+    demoUrl: 'https://temporary-swift-comet-5q40ixn.vercel.app/'
   }
 };
 
@@ -1018,6 +1105,9 @@ const modalBackgroundMedia = document.getElementById('modalBackgroundMedia');
 const modalWork = document.getElementById('modalWork');
 const modalWorkMedia = document.getElementById('modalWorkMedia');
 const modalLearned = document.getElementById('modalLearned');
+const modalDemoSection = document.getElementById('modalDemoSection');
+const modalDemoFrame = document.getElementById('modalDemoFrame');
+const modalDemoLink = document.getElementById('modalDemoLink');
 
 function renderCompareBlock(data){
   const metric = (m, isResult) => `
@@ -1200,6 +1290,15 @@ function openProjectModal(key){
   modalOverviewMedia.innerHTML = renderMedia(media.overview);
   modalBackgroundMedia.innerHTML = renderMedia(media.background);
   modalWorkMedia.innerHTML = renderMedia(media.work);
+  if(d.demoUrl){
+    modalDemoSection.classList.add('has-demo');
+    modalDemoFrame.src = d.demoUrl;
+    modalDemoLink.href = d.demoUrl;
+  } else {
+    modalDemoSection.classList.remove('has-demo');
+    modalDemoFrame.src = '';
+    modalDemoLink.href = '';
+  }
   modalOverlay.classList.add('open');
   document.body.classList.add('modal-open');
   if(key === 'brandinu') renderBrandinuCharts();
@@ -1209,6 +1308,7 @@ function openProjectModal(key){
 function closeProjectModal(){
   modalOverlay.classList.remove('open');
   document.body.classList.remove('modal-open');
+  modalDemoFrame.src = '';
 }
 
 document.querySelectorAll('.proj-detail-btn').forEach(btn=>{

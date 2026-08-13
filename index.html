@@ -301,6 +301,16 @@ section{padding:130px 0;}
 .proj-detail-btn .arrow{display:inline-block; transition:transform var(--dur-fast) var(--ease);}
 .proj-detail-btn:hover .arrow{transform:translateX(4px);}
 
+.proj-live-link{
+  display:inline-flex; align-items:center; gap:6px; margin-bottom:16px;
+  font-family:var(--sans); font-size:13px; color:var(--accent); text-decoration:none;
+  border-bottom:1px solid transparent; transition:border-bottom-color var(--dur-fast) var(--ease);
+}
+.proj-live-link:hover{border-bottom-color:var(--accent);}
+
+.modal-top-demo-btn{display:none; margin-top:0; margin-bottom:28px; text-decoration:none;}
+.modal-top-demo-btn.has-demo{display:inline-flex;}
+
 /* ---------- PROJECT MODAL (blue/navy accent, scoped to modal only) ---------- */
 .modal-overlay{
   position:fixed; inset:0; z-index:300; background:rgba(10,10,10,0.78);
@@ -726,6 +736,7 @@ body.cardnews-open{overflow:hidden;}
                 <span class="tag">소상공인 스폰서십</span>
                 <span class="tag">직접 체험 가능</span>
               </div>
+              <a class="proj-live-link" href="https://temporary-swift-comet-5q40ixn.vercel.app/" target="_blank" rel="noopener">라이브 데모 보기 ↗</a>
               <button class="proj-detail-btn" data-project="kleague" type="button">상세 보기 <span class="arrow">→</span></button>
             </div>
           </div>
@@ -799,6 +810,7 @@ body.cardnews-open{overflow:hidden;}
     <p class="modal-cat" id="modalCat"></p>
     <h3 class="modal-title" id="modalTitle"></h3>
     <p class="modal-meta" id="modalMeta"></p>
+    <a id="modalTopDemoLink" class="proj-detail-btn modal-top-demo-btn" href="" target="_blank" rel="noopener">라이브 데모 보기 <span class="arrow">→</span></a>
     <div class="modal-stats" id="modalStats"></div>
     <div class="modal-section">
       <p class="modal-section-label">01 / OVERVIEW</p>
@@ -1108,6 +1120,7 @@ const modalLearned = document.getElementById('modalLearned');
 const modalDemoSection = document.getElementById('modalDemoSection');
 const modalDemoFrame = document.getElementById('modalDemoFrame');
 const modalDemoLink = document.getElementById('modalDemoLink');
+const modalTopDemoLink = document.getElementById('modalTopDemoLink');
 
 function renderCompareBlock(data){
   const metric = (m, isResult) => `
@@ -1294,10 +1307,14 @@ function openProjectModal(key){
     modalDemoSection.classList.add('has-demo');
     modalDemoFrame.src = d.demoUrl;
     modalDemoLink.href = d.demoUrl;
+    modalTopDemoLink.href = d.demoUrl;
+    modalTopDemoLink.classList.add('has-demo');
   } else {
     modalDemoSection.classList.remove('has-demo');
     modalDemoFrame.src = '';
     modalDemoLink.href = '';
+    modalTopDemoLink.href = '';
+    modalTopDemoLink.classList.remove('has-demo');
   }
   modalOverlay.classList.add('open');
   document.body.classList.add('modal-open');
@@ -1316,6 +1333,9 @@ document.querySelectorAll('.proj-detail-btn').forEach(btn=>{
     e.stopPropagation();
     openProjectModal(btn.dataset.project);
   });
+});
+document.querySelectorAll('.proj-live-link').forEach(link=>{
+  link.addEventListener('click', (e)=> e.stopPropagation());
 });
 document.querySelectorAll('.proj-body-inner').forEach(inner=>{
   const key = inner.querySelector('.proj-detail-btn')?.dataset.project;
